@@ -11,4 +11,11 @@ const firebaseConfig = {
   measurementId: "G-Z7DVDGRXLQ",
 };
 
+// init firebase app
 initializeApp(firebaseConfig);
+
+// init services
+
+// collection ref
+
+// get collection data
