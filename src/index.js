@@ -1,4 +1,6 @@
 import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -12,10 +14,18 @@ const firebaseConfig = {
 };
 
 // init firebase app
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+
+// Initialize Firebase Authentication and get a reference to the service
+const auth = getAuth(app);
 
 // init services
+const db = getFirestore();
 
 // collection ref
+const colRef = collection(db, "users");
 
 // get collection data
+getDocs(colRef).then((snapshot) => {
+  console.log(snapshot.docs);
+});
