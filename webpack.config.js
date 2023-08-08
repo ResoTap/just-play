@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { Template } = require("webpack");
 
 module.exports = {
   mode: "development",
@@ -10,6 +11,11 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: "Just Play",
+      template: './src/index.html',
+      inject: 'body',
+      minify: {
+        collapseWhitespace: false
+      }
     }),
   ],
   output: {
