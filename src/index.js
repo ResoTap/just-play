@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore, collection, getDocs, addDoc } from "firebase/firestore";
+import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc } from "firebase/firestore";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -53,4 +53,11 @@ addBookForm.addEventListener('submit', (e) => {
 const deleteBookForm = document.querySelector('.delete')
 deleteBookForm.addEventListener('submit', (e) => {
   e.preventDefault();
+
+  const docRef = doc(db, 'users', deleteBookForm.id.value)
+
+  deleteDoc(docRef)
+    .then(() => {
+      deleteBookForm.reset()
+    })
 })
