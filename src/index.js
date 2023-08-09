@@ -30,7 +30,7 @@ onSnapshot(colRef, (snapshot) => {
   let users = [];
   snapshot.docs.forEach((doc) => {
     users.push({ ...doc.data(), id: doc.id })
-})
+  })
   console.log(users);
 });
 
@@ -49,14 +49,14 @@ addUserForm.addEventListener('submit', (e) => {
 })
 
 // deleting documents
-const deleteBookForm = document.querySelector('.delete')
-deleteBookForm.addEventListener('submit', (e) => {
+const deleteUserForm = document.querySelector('.delete')
+deleteUserForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  const docRef = doc(db, 'users', deleteBookForm.id.value)
+  const docRef = doc(db, 'users', deleteUserForm.id.value)
 
   deleteDoc(docRef)
     .then(() => {
-      deleteBookForm.reset()
+      deleteUserForm.reset()
     })
 })
