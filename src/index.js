@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore, collection, getDocs, onSnapshot, addDoc, deleteDoc, doc, query, where, orderBy } from "firebase/firestore";
+import { getFirestore, collection, getDocs, onSnapshot, addDoc, deleteDoc, doc, query, where, orderBy, serverTimestamp } from "firebase/firestore";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -26,10 +26,10 @@ const db = getFirestore();
 const colRef = collection(db, "users");
 
 //queries for specific collection documents field
-const q = query(colRef, where('game', '==', 'GTA'), orderBy('name', 'asc'))
+const q = query(colRef, orderBy('createdAt'))
 
 // real time collection data
-onSnapshot(colRef, (snapshot) => {
+onSnapshot(q, (snapshot) => {
   let users = [];
   snapshot.docs.forEach((doc) => {
     users.push({ ...doc.data(), id: doc.id })
@@ -45,6 +45,7 @@ addUserForm.addEventListener('submit', (e) => {
   addDoc(colRef, {
     username: addUserForm.username.value,
     game: addUserForm.game.value,
+    createdAt:serverTimestamp()
   })
   .then(() => {
     addUserForm.reset()
