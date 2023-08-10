@@ -72,3 +72,7 @@ getDoc(docRef)
   .then((doc) => {
     console.log(doc.data(), doc.id)
   })
+
+onSnapshot(docRef, (doc) => {
+  console.log(doc.data(), doc.id)
+})
