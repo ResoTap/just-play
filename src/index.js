@@ -25,6 +25,9 @@ const db = getFirestore();
 // collection ref
 const colRef = collection(db, "users");
 
+//queries for specific collection documents field
+const q = query(colRef, where('game', '==', 'GTA'))
+
 // real time collection data
 onSnapshot(colRef, (snapshot) => {
   let users = [];
