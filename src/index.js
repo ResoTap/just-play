@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore, collection, getDoc, onSnapshot, addDoc, deleteDoc, doc, query, where, orderBy, serverTimestamp } from "firebase/firestore";
+import { getFirestore, collection, getDoc, onSnapshot, addDoc, deleteDoc, doc, query, where, orderBy, serverTimestamp, updateDoc } from "firebase/firestore";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -75,4 +75,19 @@ getDoc(docRef)
 
 onSnapshot(docRef, (doc) => {
   console.log(doc.data(), doc.id)
+})
+
+// updating a document
+const updateForm = document.querySelector('.update')
+updateForm.addEventListener('submit', (e) => {
+  e.preventDefault()
+
+  const docRef = doc(db, 'users', updateForm.id.value)
+
+  updateDoc(docRef, {
+    username: 'updated name',
+  })
+  .then(() => {
+    updateForm.reset()
+  })
 })
