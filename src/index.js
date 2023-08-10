@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore, collection, getDocs, onSnapshot, addDoc, deleteDoc, doc, query, where } from "firebase/firestore";
+import { getFirestore, collection, getDocs, onSnapshot, addDoc, deleteDoc, doc, query, where, orderBy } from "firebase/firestore";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -26,7 +26,7 @@ const db = getFirestore();
 const colRef = collection(db, "users");
 
 //queries for specific collection documents field
-const q = query(colRef, where('game', '==', 'GTA'))
+const q = query(colRef, where('game', '==', 'GTA'), orderBy('name', 'asc'))
 
 // real time collection data
 onSnapshot(colRef, (snapshot) => {
